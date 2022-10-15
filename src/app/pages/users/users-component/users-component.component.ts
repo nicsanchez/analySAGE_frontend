@@ -1,0 +1,164 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { ToastrService } from 'ngx-toastr';
+import { UsersService } from 'src/app/services/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateEditUsersComponent } from '../modals/create-edit-users/create-edit-users.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
+import { requestDataAndPaginateIt } from 'src/utils/paginate.utils';
+
+@Component({
+  selector: 'app-users-component',
+  templateUrl: './users-component.component.html',
+  styleUrls: ['./users-component.component.css'],
+})
+export class UsersComponentComponent implements OnInit {
+  public displayedColumns: string[] = [
+    'position',
+    'name',
+    'username',
+    'document',
+    'rolname',
+    'mail',
+    'actions',
+  ];
+  public dataSource = [];
+  public itemsPerPage = 5;
+  public page = 0;
+  public total = 0;
+  public loading = false;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  public form: FormGroup;
+
+  constructor(
+    private usersService: UsersService,
+    private toastrService: ToastrService,
+    private dialog: MatDialog,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.buildForm();
+    this.getUsers();
+  }
+
+  buildForm() {
+    this.form = this.fb.group({
+      search: [
+        '',
+        [
+          Validators.min(100000),
+          Validators.max(999999999999999),
+          Validators.pattern('[0-9]+'),
+        ],
+      ],
+    });
+  }
+
+  getUsers() {
+    if (this.form.valid) {
+      this.loading = true;
+      let data = {
+        token: localStorage.getItem('token'),
+        itemsPerPage: this.itemsPerPage,
+        search: this.form.value.search,
+      };
+      requestDataAndPaginateIt(
+        data,
+        this.page,
+        this,
+        this.usersService.getUsers,
+        this.usersService,
+        this.toastrService
+      );
+    }
+  }
+
+  changePage(event: any) {
+    this.page = event.pageIndex + 1;
+    this.itemsPerPage = event.pageSize;
+    this.getUsers();
+  }
+
+  createUser() {
+    const dialogRef = this.dialog.open(CreateEditUsersComponent, {
+      data: {
+        title: 'Crear',
+        editing: false,
+      },
+      width: '500px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'ok') {
+        this.getUsers();
+      }
+    });
+  }
+
+  editUser(user: any) {
+    const dialogRef = this.dialog.open(CreateEditUsersComponent, {
+      data: {
+        title: 'Editar',
+        editing: true,
+        user: user,
+      },
+      width: '500px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'ok') {
+        this.getUsers();
+      }
+    });
+  }
+
+  openConfirmModal(id: any, username: string) {
+    this.dialog
+      .open(ConfirmComponent, {
+        width: '300px',
+        disableClose: true,
+        data: {
+          message: `Estas a punto de eliminar al usuario ${username}, tenga en cuenta que no será posible reestablecerse.`,
+        },
+      })
+      .afterClosed()
+      .subscribe((option: boolean) => {
+        if (option) {
+          this.deleteUser(id);
+        }
+      });
+  }
+
+  deleteUser(id: any) {
+    let data = {
+      id,
+      token: localStorage.getItem('token'),
+    };
+    this.usersService.deleteUser(data).subscribe(
+      (response: any) => {
+        if (response.status == 200) {
+          this.toastrService.success(
+            'Se ha eliminado exitosamente el usuario',
+            'Exito'
+          );
+          this.getUsers();
+        } else {
+          this.toastrService.error(
+            'No fue posible eliminarse el usuario',
+            'Error'
+          );
+        }
+      },
+      () => {
+        this.toastrService.error(
+          'Ocurrió un error al eliminarse el usuario',
+          'Error'
+        );
+      }
+    );
+  }
+}
