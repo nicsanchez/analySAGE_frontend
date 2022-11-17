@@ -4,7 +4,7 @@
 
 .tabla-header {
   font-family: "Roboto-Regular", serif;
-  color: #026937;
+  color: var(--success);
   font-size: 15px;
 }
 
@@ -17,5 +17,5 @@
 .card-title {
   font-family: "Roboto-Regular", serif;
   font-size: 30px;
-  color: #026937;
+  color: var(--success);
 }

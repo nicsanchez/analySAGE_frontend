@@ -1,7 +1,7 @@
 .card-title {
     font-family: "Roboto-Regular", serif;
     font-size: 30px;
-    color: #026937;
+    color: var(--success);
     text-align: center;
 }
 

@@ -1,0 +1,14 @@
+.bulk__submit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.bulk__title {
+  color: var(--success);
+}
+
+.bulk__description {
+  color: var(--light);
+}

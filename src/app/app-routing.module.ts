@@ -30,6 +30,11 @@ const routes: Routes = [
             loadChildren: () =>
               import('./pages/logs/logs.module').then((x) => x.LogsModule),
           },
+          {
+            path: '',
+            loadChildren: () =>
+              import('./pages/bulk/bulk.module').then((x) => x.BulkModule),
+          },
         ],
       },
       {

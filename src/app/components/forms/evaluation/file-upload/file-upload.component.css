@@ -1,15 +1,14 @@
 .card-title {
     font-family: "Roboto-Regular", serif;
     font-size: 30px;
-    color: #026937;
+    color: var(--success);
   }
-  
+
   .btn-center {
     text-align: center;
     display: block;
   }
-  
+
   mat-form-field {
     width: 100% !important;
   }
-  

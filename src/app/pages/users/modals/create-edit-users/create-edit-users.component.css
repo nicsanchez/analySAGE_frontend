@@ -8,19 +8,19 @@ mat-form-field {
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
-  color: #026937 !important;
+  color: var(--success) !important;
 }
 
 ::ng-deep.mat-form-field-outline {
-  color: #026937 !important;
+  color: var(--success) !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
-  background-color: #026937 !important;
+  background-color: var(--success) !important;
 }
 
 .card-title {
   font-family: "Roboto-Regular", serif;
   font-size: 30px;
-  color: #026937;
+  color: var(--success);
 }

@@ -3,7 +3,7 @@
 }
 
 .add {
-  background-color: #026937;
+  background-color: var(--success);
   color: white;
   float: right;
   display: inline;
@@ -12,12 +12,12 @@
 .card-title {
   font-family: "Roboto-Regular", serif;
   font-size: 30px;
-  color: #026937;
+  color: var(--success);
 }
 
 .tabla-header {
   font-family: "Roboto-Regular", serif;
-  color: #026937;
+  color: var(--success);
   font-size: 15px;
 }
 

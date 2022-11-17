@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   public isExpanded = false;
 
   public ROUTES_ADMIN = [
+    { path: '/bulk', title: 'Cargas Masivas', icon: 'cloud_upload' },
     { path: '/users', title: 'Usuarios', icon: 'people' },
     { path: '/logs', title: 'Seguimiento', icon: 'visibility' },
   ];

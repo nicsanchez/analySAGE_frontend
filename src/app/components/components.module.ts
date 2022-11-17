@@ -23,6 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorComponent } from './error/error.component';
 import { FileUploadComponent } from './forms/evaluation/file-upload/file-upload.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { MatCardModule } from '@angular/material/card';
+import { BulkCardComponent } from './bulk-card/bulk-card.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     UserFormComponent,
     ErrorComponent,
     FileUploadComponent,
+    BulkCardComponent,
   ],
   imports: [
     CommonModule,
@@ -53,12 +56,14 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     MatFormFieldModule,
     NgxMatFileInputModule,
     FormsModule,
+    MatCardModule,
   ],
   exports: [
     NavbarComponent,
     SidebarComponent,
     LoadingComponent,
     UserFormComponent,
+    BulkCardComponent
   ],
 })
 export class ComponentsModule {}

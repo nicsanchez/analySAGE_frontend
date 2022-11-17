@@ -9,21 +9,28 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+:root
+{
+  --success: #026937;
+  --danger: #af1717;
+  --light: rgb(123, 117, 117);
+}
+
 .title {
   font-family: "Roboto-Regular", serif;
   padding: 10px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
-  color: #026937 !important;
+  color: var(--success) !important;
 }
 
 ::ng-deep.mat-form-field-underline {
-  background-color: #026937 !important;
+  background-color: var(--success) !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
-  background-color: #026937 !important;
+  background-color: var(--success) !important;
 }
 
 @font-face {
@@ -37,11 +44,11 @@ body {
 }
 
 .btn-success{
-  background-color: #026937;
+  background-color: var(--success);
   color: white;
 }
 
 .btn-danger{
-  background-color: #af1717;
+  background-color: var(--danger);
   color: white;
 }
