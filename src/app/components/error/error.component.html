@@ -3,7 +3,10 @@
   <p>
     {{ description }}
   </p>
-  <table class="table table-hover" aria-describedby="Tabla que lista errores en el envio masivo de correos electrónicos.">
+  <table
+    class="table table-hover"
+    aria-describedby="Tabla que lista errores de las cargas masivas."
+  >
     <thead class="table-dark text-center">
       <tr>
         <th scope="col" *ngFor="let header of headers">{{ header }}</th>
@@ -13,10 +16,12 @@
       <tr *ngFor="let error of errors">
         <th scope="row" class="text-center">{{ error.row }}</th>
         <td>
-            <ul>
-                <li *ngFor="let errorDescription of error.error">{{errorDescription}}</li>
-            </ul>
-          </td>
+          <ul>
+            <li *ngFor="let errorDescription of error.error">
+              {{ errorDescription }}
+            </li>
+          </ul>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -26,4 +31,3 @@
     Cerrar
   </button>
 </div>
-

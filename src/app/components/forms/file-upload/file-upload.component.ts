@@ -18,7 +18,6 @@ export class FileUploadComponent implements OnInit {
   public loading: boolean = false;
   public title: string = '';
   public nextStep: string = '';
-  public error: any;
   public form: any;
   public formDataAttachment = new FormData();
   public attachmentConditions: any;
@@ -33,7 +32,6 @@ export class FileUploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.data.title;
-    this.error = this.data.error;
     this.attachmentConditions = this.data.attachmentConditions;
     this.nextStep = this.data.nextStep;
     this.buildForm();
@@ -98,20 +96,14 @@ export class FileUploadComponent implements OnInit {
       (response: any) => {
         this.loading = false;
         if (response.status == 200) {
-          if (response.evaluations) {
-            let a = document.createElement('a');
-            a.href = `data:text/plain;base64,${response.evaluations}`;
-            a.download = 'Evaluaciones.zip';
-            a.click();
-          }
           if (response.errors && response.errors.length) {
             this.dialog.open(ErrorComponent, {
               width: '500px',
               disableClose: true,
               data: {
                 errors: response.errors,
-                description: this.error.description,
-                headers: this.error.headers,
+                description:'Los siguientes son errores de validación',
+                headers: ['Fila', 'Descripción del error'],
               },
             });
             this.toastrService.warning(

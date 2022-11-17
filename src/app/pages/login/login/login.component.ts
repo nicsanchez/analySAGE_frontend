@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
     const data = { token };
     this.loginService.getPermissions(data).subscribe(
       (response: any) => {
-        this.setGlobalRoleAndGoToEvaluations(response, data);
+        this.setGlobalRoleAndGoToBulk(response, data);
       },
       () => {
         const errorMessage =
@@ -84,10 +84,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  setGlobalRoleAndGoToEvaluations(response: any, data: any) {
+  setGlobalRoleAndGoToBulk(response: any, data: any) {
     if (response.status == 200) {
       this.loginService.setGlobalRol(response.data['0']['key']);
-      this.router.navigate(['my-profile']);
+      this.router.navigate(['bulk']);
       this.toastrService.success('Ha iniciado sesión exitosamente.', 'Exito');
     } else {
       const errorMessage =

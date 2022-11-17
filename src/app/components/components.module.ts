@@ -21,7 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorComponent } from './error/error.component';
-import { FileUploadComponent } from './forms/evaluation/file-upload/file-upload.component';
+import { FileUploadComponent } from './forms/file-upload/file-upload.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatCardModule } from '@angular/material/card';
 import { BulkCardComponent } from './bulk-card/bulk-card.component';
