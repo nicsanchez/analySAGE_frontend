@@ -4,7 +4,7 @@ import { BulkComponent } from './bulk.component';
 import { BulkRoutes } from './bulk.routing';
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from 'src/app/components/components.module';
-
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
   imports: [
     CommonModule,
     RouterModule.forChild(BulkRoutes),
-    ComponentsModule
+    ComponentsModule,
+    MatStepperModule,
   ]
 })
 export class BulkModule { }

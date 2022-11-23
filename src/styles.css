@@ -14,6 +14,7 @@ body {
   --success: #026937;
   --danger: #af1717;
   --light: rgb(123, 117, 117);
+  --green_light: #8dc63f;
 }
 
 .title {

@@ -1,5 +1,13 @@
 <div class="container">
-  <app-bulk-card [data]="inscribedData"></app-bulk-card>
-  <app-bulk-card [data]="questionsData"></app-bulk-card>
-  <app-bulk-card [data]="answersData"></app-bulk-card>
+  <mat-vertical-stepper>
+    <mat-step label="Inscritos por semestre">
+      <app-bulk-card [data]="inscribedData"></app-bulk-card>
+    </mat-step>
+    <mat-step label="Ruta de respuestas">
+      <app-bulk-card [data]="questionsData"></app-bulk-card>
+    </mat-step>
+    <mat-step label="Respuestas marcadas">
+      <app-bulk-card [data]="answersData"></app-bulk-card>
+    </mat-step>
+  </mat-vertical-stepper>
 </div>
