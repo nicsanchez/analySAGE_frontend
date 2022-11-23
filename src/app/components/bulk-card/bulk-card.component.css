@@ -11,4 +11,5 @@
 
 .bulk__description {
   color: var(--light);
+  text-align: justify;
 }

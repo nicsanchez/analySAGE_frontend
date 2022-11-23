@@ -41,6 +41,7 @@ export class FileUploadComponent implements OnInit {
   buildForm() {
     this.form = this.fb.group({
       file: ['', [Validators.required]],
+      semester: ['', [Validators.required]],
     });
   }
 
@@ -92,6 +93,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   switchRequest() {
+    this.formDataAttachment.append('semester', this.form.controls['semester'].value);
     this.data.callback(this.formDataAttachment, this.data.service).subscribe(
       (response: any) => {
         this.loading = false;

@@ -5,6 +5,15 @@
     <div class="row">
       <div class="col-12">
         <mat-form-field appearance="outline">
+          <mat-label>Semestre</mat-label>
+          <input matInput type="number" formControlName="semester" />
+          <mat-error *ngIf="form.controls['semester'].hasError('required')"
+            >Este campo es requerido</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col-12">
+        <mat-form-field appearance="outline">
           <mat-label>Archivo Adjunto</mat-label>
           <ngx-mat-file-input
             formControlName="file"
@@ -26,10 +35,9 @@
           Cancelar
         </button>
         <button mat-raised-button class="btn-success" type="submit">
-          {{nextStep}}
+          {{ nextStep }}
         </button>
       </div>
     </div>
   </div>
 </form>
-
