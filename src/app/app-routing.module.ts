@@ -35,6 +35,11 @@ const routes: Routes = [
             loadChildren: () =>
               import('./pages/bulk/bulk.module').then((x) => x.BulkModule),
           },
+          {
+            path: '',
+            loadChildren: () =>
+              import('./pages/dynamic-statistics/dynamic-statistics.module').then((x) => x.DynamicStatisticsModule),
+          }
         ],
       },
       {
