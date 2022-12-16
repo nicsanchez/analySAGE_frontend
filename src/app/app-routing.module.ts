@@ -38,8 +38,17 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('./pages/dynamic-statistics/dynamic-statistics.module').then((x) => x.DynamicStatisticsModule),
-          }
+              import(
+                './pages/dynamic-statistics/dynamic-statistics.module'
+              ).then((x) => x.DynamicStatisticsModule),
+          },
+          {
+            path: '',
+            loadChildren: () =>
+              import('./pages/configuration/configuration.module').then(
+                (x) => x.ConfigurationModule
+              ),
+          },
         ],
       },
       {

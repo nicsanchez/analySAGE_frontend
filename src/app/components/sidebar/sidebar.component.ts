@@ -15,8 +15,13 @@ export class SidebarComponent implements OnInit {
   public ROUTES_ADMIN = [
     { path: '/bulk', title: 'Cargas Masivas', icon: 'cloud_upload' },
     { path: '/users', title: 'Usuarios', icon: 'people' },
-    { path: '/dynamicStatistics', title: 'Estadísticas dinámicas', icon: 'bar_chart' },
-    { path: '/logs', title: 'Seguimiento', icon: 'visibility' }
+    {
+      path: '/dynamicStatistics',
+      title: 'Estadísticas dinámicas',
+      icon: 'bar_chart',
+    },
+    { path: '/logs', title: 'Seguimiento', icon: 'visibility' },
+    { path: '/configuration', title: 'Configuración', icon: 'settings' },
   ];
 
   public ROUTES_USER = [];
