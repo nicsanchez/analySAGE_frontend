@@ -1,18 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-dynamic-statistics',
   templateUrl: './dynamic-statistics.component.html',
   styleUrls: ['./dynamic-statistics.component.css'],
 })
-export class DynamicStatisticsComponent implements OnInit {
+export class DynamicStatisticsComponent implements AfterViewInit {
   public searchForm: FormGroup;
   public firstOptionProgramOptions: any;
   public firstOptionProgramFilter: FormControl = new FormControl();
@@ -20,18 +16,34 @@ export class DynamicStatisticsComponent implements OnInit {
     any[]
   >(1);
   protected _firstOptionProgramDestroy = new Subject<void>();
-
+  @ViewChild('rightAnswersBySession') private rightAnswersBySession: ElementRef;
+  public barErrorGraphChart: any;
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       firstOptionProgram: [''],
     });
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.fullfillForm();
     this.preparePredictiveSearch();
+    this.setGraphs();
   }
+  setGraphs() {
+    const ctx = this.rightAnswersBySession.nativeElement;
+    const errorData = {
+      label: 'Cantidad de aciertos por jornada para pregunta 40',
+      data: [10000, 21400, 8500, 4459, 5544, 6111, 7787],
+    };
 
+    this.barErrorGraphChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['1', '2', '3', '4', '5', '6', '7'],
+        datasets: [errorData],
+      },
+    });
+  }
   fullfillForm() {
     let exampleVariable = [
       { id: 1, name: 'Ingenieria electrónica' },
