@@ -3,6 +3,7 @@
     <mat-card-title>
       <h1 class="card-title">Estadísticas dinámicas del examen de admisión</h1>
     </mat-card-title>
+    <!--
     <mat-card-content class="mt-4">
       <form [formGroup]="searchForm">
         <div class="row">
@@ -32,9 +33,15 @@
           </mat-form-field>
         </div>
       </form>
-    </mat-card-content>
-    <div class="col-6">
-      <canvas #rightAnswersBySession></canvas>
-    </div>
+    </mat-card-content>-->
+    <mat-tab-group mat-stretch-tabs>
+      <mat-tab label="Estadisticas por pregunta">
+        <app-questions></app-questions>
+      </mat-tab>
+      <mat-tab label="Estadisticas por versión">
+        <app-version></app-version>
+      </mat-tab>
+      <mat-tab label="Third"> </mat-tab>
+    </mat-tab-group>
   </mat-card>
 </div>

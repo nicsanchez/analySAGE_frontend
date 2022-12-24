@@ -16,7 +16,7 @@ export class PermissionsGuard implements CanActivateChild {
     if (rol === 'ADMIN') {
       return true;
     } else {
-      this.router.navigate(['my-profile']);
+      this.router.navigate(['dynamicStatistics']);
       return false;
     }
   }

@@ -38,13 +38,6 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import(
-                './pages/dynamic-statistics/dynamic-statistics.module'
-              ).then((x) => x.DynamicStatisticsModule),
-          },
-          {
-            path: '',
-            loadChildren: () =>
               import('./pages/configuration/configuration.module').then(
                 (x) => x.ConfigurationModule
               ),
@@ -60,6 +53,13 @@ const routes: Routes = [
               import('./pages/my-profile/my-profile.module').then(
                 (x) => x.MyProfileModule
               ),
+          },
+          {
+            path: '',
+            loadChildren: () =>
+              import(
+                './pages/dynamic-statistics/dynamic-statistics.module'
+              ).then((x) => x.DynamicStatisticsModule),
           },
         ],
       },

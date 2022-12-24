@@ -25,6 +25,9 @@ import { FileUploadComponent } from './forms/file-upload/file-upload.component';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatCardModule } from '@angular/material/card';
 import { BulkCardComponent } from './bulk-card/bulk-card.component';
+import { QuestionsComponent } from './statistics/questions/questions.component';
+import { VersionComponent } from './statistics/version/version.component';
+import { FiltersComponent } from './statistics/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { BulkCardComponent } from './bulk-card/bulk-card.component';
     ErrorComponent,
     FileUploadComponent,
     BulkCardComponent,
+    QuestionsComponent,
+    VersionComponent,
+    FiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +69,10 @@ import { BulkCardComponent } from './bulk-card/bulk-card.component';
     SidebarComponent,
     LoadingComponent,
     UserFormComponent,
-    BulkCardComponent
+    BulkCardComponent,
+    QuestionsComponent,
+    VersionComponent,
+    FiltersComponent,
   ],
 })
 export class ComponentsModule {}

@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [DynamicStatisticsComponent],
@@ -23,6 +24,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatSelectModule,
     NgxMatSelectSearchModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
 })
 export class DynamicStatisticsModule {}

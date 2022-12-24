@@ -1,0 +1,103 @@
+<mat-card>
+  <mat-card-title>
+    <h1>Filtros</h1>
+  </mat-card-title>
+  <mat-card-content>
+    <form
+      role="form"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form"
+      autocomplete="off"
+      class="filtersForm"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Semestre</mat-label>
+        <mat-select formControlName="semester">
+          <mat-option></mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['semester'].hasError('required')"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Jornada</mat-label>
+        <mat-select formControlName="journey">
+          <mat-option></mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls['journey'].hasError('required')"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estrato</mat-label>
+        <mat-select formControlName="stratum">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Género</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Programa Primera Opción</mat-label>
+        <mat-select formControlName="firstOptionProgram">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Programa Segunda Opción</mat-label>
+        <mat-select formControlName="secondOptionProgram">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Continente de Residencia</mat-label>
+        <mat-select formControlName="continent">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Pais de Residencia</mat-label>
+        <mat-select formControlName="country">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Departamento de Residencia</mat-label>
+        <mat-select formControlName="state">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Municipio de Residencia</mat-label>
+        <mat-select formControlName="municipality">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Naturalidad del colegio</mat-label>
+        <mat-select formControlName="schoolNaturalness">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Colegio</mat-label>
+        <mat-select formControlName="school">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

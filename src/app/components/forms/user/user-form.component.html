@@ -131,11 +131,14 @@
     <app-loading [value]="30"></app-loading>
   </div>
   <div *ngIf="!loading" mat-dialog-actions class="btn-center">
-    <button *ngIf="!this.data.personal" mat-raised-button class="btn-danger" matDialogClose>
+    <button
+      *ngIf="!this.data.personal"
+      mat-raised-button
+      class="btn-danger"
+      matDialogClose
+    >
       Cancelar
     </button>
-    <button mat-raised-button class="btn-success" type="submit">
-      Guardar
-    </button>
+    <button mat-raised-button class="btn-success" type="submit">Guardar</button>
   </div>
 </form>
