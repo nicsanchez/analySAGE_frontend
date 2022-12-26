@@ -3,37 +3,6 @@
     <mat-card-title>
       <h1 class="card-title">Estadísticas dinámicas del examen de admisión</h1>
     </mat-card-title>
-    <!--
-    <mat-card-content class="mt-4">
-      <form [formGroup]="searchForm">
-        <div class="row">
-          <mat-form-field class="col-3">
-            <mat-select
-              formControlName="firstOptionProgram"
-              placeholder="Programa de primera opción"
-              multiple
-            >
-              <mat-option>
-                <ngx-mat-select-search
-                  placeholderLabel="Buscar"
-                  noEntriesFoundLabel="Sin resultados"
-                  [formControl]="firstOptionProgramFilter"
-                ></ngx-mat-select-search>
-              </mat-option>
-              <mat-option
-                *ngFor="
-                  let firstOptionProgramOption of filteredFirstOptionProgram
-                    | async
-                "
-                [value]="firstOptionProgramOption.id"
-              >
-                {{ firstOptionProgramOption.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </form>
-    </mat-card-content>-->
     <mat-tab-group mat-stretch-tabs>
       <mat-tab label="Estadisticas por pregunta">
         <app-questions></app-questions>

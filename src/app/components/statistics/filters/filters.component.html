@@ -12,8 +12,14 @@
     >
       <mat-form-field appearance="outline">
         <mat-label>Semestre</mat-label>
-        <mat-select formControlName="semester">
+        <mat-select
+          formControlName="semester"
+          (selectionChange)="getAllJourneys()"
+        >
           <mat-option></mat-option>
+          <mat-option *ngFor="let semester of semesters" [value]="semester.id">
+            {{ semester.name }}
+          </mat-option>
         </mat-select>
         <mat-error *ngIf="form.controls['semester'].hasError('required')"
           >Este campo es requerido</mat-error
@@ -23,6 +29,12 @@
         <mat-label>Jornada</mat-label>
         <mat-select formControlName="journey">
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let journey of journeys"
+            [value]="journey.day_session"
+          >
+            {{ journey.day_session }}
+          </mat-option>
         </mat-select>
         <mat-error *ngIf="form.controls['journey'].hasError('required')"
           >Este campo es requerido</mat-error
@@ -33,6 +45,9 @@
         <mat-label>Estrato</mat-label>
         <mat-select formControlName="stratum">
           <mat-option></mat-option>
+          <mat-option *ngFor="let stratum of stratums" [value]="stratum.id">
+            {{ stratum.number }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -40,6 +55,22 @@
         <mat-label>Género</mat-label>
         <mat-select formControlName="gender">
           <mat-option></mat-option>
+          <mat-option *ngFor="let gender of genders" [value]="gender.id">
+            {{ gender.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Facultad Primera Opción</mat-label>
+        <mat-select
+          formControlName="firstOptionFaculty"
+          (selectionChange)="getProgramsByFaculty($event.value, 'first')"
+        >
+          <mat-option></mat-option>
+          <mat-option *ngFor="let faculty of faculties" [value]="faculty.id">
+            {{ faculty.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -47,6 +78,25 @@
         <mat-label>Programa Primera Opción</mat-label>
         <mat-select formControlName="firstOptionProgram">
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let program of firstPrograms"
+            [value]="program.id"
+          >
+            {{ program.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Facultad Segunda Opción</mat-label>
+        <mat-select
+          formControlName="secondOptionFaculty"
+          (selectionChange)="getProgramsByFaculty($event.value, 'second')"
+        >
+          <mat-option></mat-option>
+          <mat-option *ngFor="let faculty of faculties" [value]="faculty.id">
+            {{ faculty.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -54,41 +104,86 @@
         <mat-label>Programa Segunda Opción</mat-label>
         <mat-select formControlName="secondOptionProgram">
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let program of secondPrograms"
+            [value]="program.id"
+          >
+            {{ program.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Continente de Residencia</mat-label>
-        <mat-select formControlName="continent">
+        <mat-select
+          formControlName="continent"
+          (selectionChange)="getAllCountriesByContinent()"
+        >
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let continent of continents"
+            [value]="continent.id"
+          >
+            {{ continent.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Pais de Residencia</mat-label>
-        <mat-select formControlName="country">
+        <mat-select
+          formControlName="country"
+          (selectionChange)="getAllStatesByCountry()"
+        >
           <mat-option></mat-option>
+          <mat-option *ngFor="let country of countries" [value]="country.id">
+            {{ country.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Departamento de Residencia</mat-label>
-        <mat-select formControlName="state">
+        <mat-select
+          formControlName="state"
+          (selectionChange)="getAllMunicipalitiesByState()"
+        >
           <mat-option></mat-option>
+          <mat-option *ngFor="let state of states" [value]="state.id">
+            {{ state.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Municipio de Residencia</mat-label>
-        <mat-select formControlName="municipality">
+        <mat-select
+          formControlName="municipality"
+          (selectionChange)="getAllSchoolsByNaturalnessAndMunicipality()"
+        >
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let municipality of municipalities"
+            [value]="municipality.id"
+          >
+            {{ municipality.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Naturalidad del colegio</mat-label>
-        <mat-select formControlName="schoolNaturalness">
+        <mat-select
+          formControlName="schoolNaturalness"
+          (selectionChange)="getAllSchoolsByNaturalnessAndMunicipality()"
+        >
           <mat-option></mat-option>
+          <mat-option
+            *ngFor="let naturalness of naturalnesses"
+            [value]="naturalness.naturalness"
+          >
+            {{ naturalness.naturalness }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -96,6 +191,9 @@
         <mat-label>Colegio</mat-label>
         <mat-select formControlName="school">
           <mat-option></mat-option>
+          <mat-option *ngFor="let school of schools" [value]="school.id">
+            {{ school.name }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </form>
