@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    <h1>Filtros</h1>
+    <h1 class="card-title">Filtros</h1>
   </mat-card-title>
   <mat-card-content>
     <form
@@ -196,6 +196,16 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <div class="button-container">
+        <div *ngIf="loading" class="d-flex justify-content-center">
+          <app-loading [value]="30"></app-loading>
+        </div>
+        <div *ngIf="!loading" mat-dialog-actions class="btn-center">
+          <button mat-raised-button class="btn-success" type="submit">
+            Consultar
+          </button>
+        </div>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

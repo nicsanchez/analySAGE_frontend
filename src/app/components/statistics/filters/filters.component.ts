@@ -1,6 +1,6 @@
 import { FacultyService } from './../../../services/faculty.service';
 import { ContinentService } from './../../../services/continent.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService } from 'src/app/services/country.service';
@@ -33,8 +33,10 @@ export class FiltersComponent implements OnInit {
   public municipalities: any = [];
   public naturalnesses: any = [];
   public schools: any = [];
+  public loading: boolean = false;
 
   @Input() data: any;
+  @Output() dashboardData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -55,49 +57,61 @@ export class FiltersComponent implements OnInit {
   ngOnInit(): void {
     this.getIndependentFilters();
     this.buildForm();
+    this.getDashboardData({});
   }
 
   /* Método para construir el formulario reactivo*/
   buildForm() {
     this.form = this.fb.group({
-      semester: ['', Validators.required],
-      journey: ['', Validators.required],
-      gender: [''],
-      stratum: [''],
-      firstOptionFaculty: [''],
-      firstOptionProgram: [''],
-      secondOptionFaculty: [''],
-      secondOptionProgram: [''],
-      continent: [''],
-      country: [''],
-      state: [''],
-      municipality: [''],
-      schoolNaturalness: [''],
-      school: [''],
+      semester: [undefined, Validators.required],
+      journey: [undefined, Validators.required],
+      gender: [undefined],
+      stratum: [undefined],
+      firstOptionFaculty: [undefined],
+      firstOptionProgram: [undefined],
+      secondOptionFaculty: [undefined],
+      secondOptionProgram: [undefined],
+      continent: [undefined],
+      country: [undefined],
+      state: [undefined],
+      municipality: [undefined],
+      schoolNaturalness: [undefined],
+      school: [undefined],
     });
   }
 
   onSubmit() {
+    const data = this.form.value;
     if (this.form.valid) {
-      this.data.method.subscribe(
-        (response: any) => {
-          if (response.status == 200) {
-            console.log('emitir información');
-          } else {
-            this.toastrService.error(
-              'No fue posible obtenerse la información solicitada.',
-              'Error'
-            );
-          }
-        },
-        () => {
+      this.getDashboardData(data);
+    }
+  }
+
+  getDashboardData(data: any) {
+    this.loading = true;
+    this.data.method(data, this.data.service).subscribe(
+      (response: any) => {
+        this.loading = false;
+        if (response.status == 200) {
+          this.dashboardData.emit({
+            right: response.right,
+            bad: response.bad,
+          });
+        } else {
           this.toastrService.error(
-            'Ocurrió un error al obtenerse la información solicitada.',
+            'No fue posible obtenerse la información solicitada.',
             'Error'
           );
         }
-      );
-    }
+      },
+      () => {
+        this.loading = false;
+        this.toastrService.error(
+          'Ocurrió un error al obtenerse la información solicitada.',
+          'Error'
+        );
+      }
+    );
   }
 
   getIndependentFilters() {
@@ -256,7 +270,7 @@ export class FiltersComponent implements OnInit {
 
   getAllJourneys() {
     const idSemester = this.form.controls['semester'].value;
-    this.form.controls['journey'].value = '';
+    this.form.controls['journey'].setValue(undefined);
     if (idSemester) {
       const data = {
         token: localStorage.getItem('token'),
@@ -287,8 +301,8 @@ export class FiltersComponent implements OnInit {
 
   getProgramsByFaculty(idFaculty: any, type: any) {
     type === 'first'
-      ? (this.form.controls['firstOptionProgram'].value = '')
-      : (this.form.controls['secondOptionProgram'].value = '');
+      ? this.form.controls['firstOptionProgram'].setValue(undefined)
+      : this.form.controls['secondOptionProgram'].setValue(undefined);
     if (idFaculty) {
       const data = {
         token: localStorage.getItem('token'),
@@ -321,13 +335,13 @@ export class FiltersComponent implements OnInit {
 
   getAllCountriesByContinent() {
     const idContinent = this.form.controls['continent'].value;
-    this.form.controls['country'].value = '';
+    this.form.controls['country'].setValue(undefined);
     this.countries = [];
-    this.form.controls['state'].value = '';
+    this.form.controls['state'].setValue(undefined);
     this.states = [];
-    this.form.controls['municipality'].value = '';
+    this.form.controls['municipality'].setValue(undefined);
     this.municipalities = [];
-    this.form.controls['school'].value = '';
+    this.form.controls['school'].setValue(undefined);
     this.schools = [];
     if (idContinent) {
       const data = {
@@ -357,11 +371,11 @@ export class FiltersComponent implements OnInit {
 
   getAllStatesByCountry() {
     const idCountry = this.form.controls['country'].value;
-    this.form.controls['state'].value = '';
+    this.form.controls['state'].setValue(undefined);
     this.states = [];
-    this.form.controls['municipality'].value = '';
+    this.form.controls['municipality'].setValue(undefined);
     this.municipalities = [];
-    this.form.controls['school'].value = '';
+    this.form.controls['school'].setValue(undefined);
     this.schools = [];
     if (idCountry) {
       const data = {
@@ -391,9 +405,9 @@ export class FiltersComponent implements OnInit {
 
   getAllMunicipalitiesByState() {
     const idState = this.form.controls['state'].value;
-    this.form.controls['municipality'].value = '';
+    this.form.controls['municipality'].setValue(undefined);
     this.municipalities = [];
-    this.form.controls['school'].value = '';
+    this.form.controls['school'].setValue(undefined);
     this.schools = [];
     if (idState) {
       const data = {
@@ -424,7 +438,7 @@ export class FiltersComponent implements OnInit {
   getAllSchoolsByNaturalnessAndMunicipality() {
     const idMunicipality = this.form.controls['municipality'].value;
     const schoolNaturalness = this.form.controls['schoolNaturalness'].value;
-    this.form.controls['school'].value = '';
+    this.form.controls['school'].setValue(undefined);
     this.schools = [];
     if (idMunicipality || schoolNaturalness) {
       const data = {

@@ -2,3 +2,18 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.btn-center {
+  text-align: center;
+  display: block;
+}
+
+.button-container{
+  width: 100%;
+}
+
+.card-title {
+  font-family: "Roboto-Regular", serif;
+  font-size: 30px;
+  color: var(--success);
+}

@@ -1,6 +1,9 @@
 <div class="col-12 mt-4">
   <div>
-    <app-filters></app-filters>
+    <app-filters
+      (dashboardData)="receiveDataAndSplitItInTwoCharts($event)"
+      [data]="questionsData"
+    ></app-filters>
   </div>
   <div class="graphic">
     <canvas #firstHalfAnswersBySession></canvas>

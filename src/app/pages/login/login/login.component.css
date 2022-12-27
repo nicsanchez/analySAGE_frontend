@@ -28,15 +28,3 @@ mat-form-field {
   background-color: var(--success);
   color: white;
 }
-
-::ng-deep .mat-focused .mat-form-field-label {
-  color: var(--success) !important;
-}
-
-::ng-deep.mat-form-field-outline {
-  color: var(--success) !important;
-}
-
-::ng-deep.mat-form-field-ripple {
-  background-color: var(--success) !important;
-}

@@ -14,8 +14,22 @@ export class AnswersService {
     answersService.headers = {
       Authorization: `Bearer ${token}`,
     };
+
     return answersService.http.post(
       `${environment.apiURL}/answers/storeAnswers`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
+
+  getRightAndBadAnswersQuantity(data: any, answersService: AnswersService) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getRightAndBadAnswersQuantity`,
       data,
       { headers: answersService.headers }
     );

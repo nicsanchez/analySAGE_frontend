@@ -32,3 +32,23 @@
   overflow: hidden;
   vertical-align: middle;
 }
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: var(--success) !important;
+}
+
+::ng-deep.mat-form-field-outline {
+  color: var(--success) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: var(--success) !important;
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: var(--success) !important;
+}
+
+::ng-deep .mat-tab-label{
+  color: var(--success) !important;
+}
