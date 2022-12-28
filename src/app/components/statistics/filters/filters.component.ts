@@ -64,7 +64,10 @@ export class FiltersComponent implements OnInit {
   buildForm() {
     this.form = this.fb.group({
       semester: [undefined, Validators.required],
-      journey: [undefined, Validators.required],
+      journey: [
+        undefined,
+        this.data.journeyRequired ? Validators.required : [],
+      ],
       gender: [undefined],
       stratum: [undefined],
       firstOptionFaculty: [undefined],

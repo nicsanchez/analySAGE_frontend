@@ -1,6 +1,9 @@
 <div class="col-12 mt-4">
-  <div class="col-8">
-    <canvas #rightAnswersByVersion></canvas>
+  <div>
+    <app-filters
+      (dashboardData)="receiveDataAndProcessIt($event)"
+      [data]="admittedData"
+    ></app-filters>
   </div>
-  <div class="col-1"></div>
+  <app-bar-chart [data]="admittedBarChart"></app-bar-chart>
 </div>

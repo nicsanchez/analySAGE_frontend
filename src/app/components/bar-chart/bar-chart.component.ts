@@ -75,8 +75,6 @@ export class BarChartComponent implements AfterViewInit, OnChanges {
           x: {
             ticks: {
               autoSkip: false,
-              maxRotation: 0,
-              minRotation: 0,
             },
           },
         },
