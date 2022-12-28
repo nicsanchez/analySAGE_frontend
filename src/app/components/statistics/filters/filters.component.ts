@@ -96,6 +96,7 @@ export class FiltersComponent implements OnInit {
           this.dashboardData.emit({
             right: response.right,
             bad: response.bad,
+            filters: data,
           });
         } else {
           this.toastrService.error(

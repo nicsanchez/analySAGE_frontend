@@ -1,0 +1,5 @@
+.card-title {
+  font-family: "Roboto-Regular", serif;
+  font-size: 30px;
+  color: var(--success);
+}

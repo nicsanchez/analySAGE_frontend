@@ -34,4 +34,59 @@ export class AnswersService {
       { headers: answersService.headers }
     );
   }
+
+  getDetailsAnswerByVersion(data: any, answersService: AnswersService) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAnswerByVersion`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
+
+  getDetailsAnswerByState(data: any, answersService: AnswersService) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAnswerByState`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
+
+  getDetailsAnswerByStratum(data: any, answersService: AnswersService) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAnswerByStratum`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
+
+  getDetailsAnswerByFacultyFirstOption(
+    data: any,
+    answersService: AnswersService
+  ) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAnswerByFacultyFirstOption`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
 }

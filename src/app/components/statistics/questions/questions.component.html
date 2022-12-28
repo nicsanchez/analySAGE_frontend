@@ -5,10 +5,12 @@
       [data]="questionsData"
     ></app-filters>
   </div>
-  <div class="graphic">
-    <canvas #firstHalfAnswersBySession></canvas>
-  </div>
-  <div class="graphic">
-    <canvas #secondHalfAnswersBySession></canvas>
-  </div>
+  <app-bar-chart
+    (outputData)="showQuestionDetails($event)"
+    [data]="firstMiddleData"
+  ></app-bar-chart>
+  <app-bar-chart
+    (outputData)="showQuestionDetails($event)"
+    [data]="secondMiddleData"
+  ></app-bar-chart>
 </div>

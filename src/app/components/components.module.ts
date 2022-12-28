@@ -28,6 +28,9 @@ import { BulkCardComponent } from './bulk-card/bulk-card.component';
 import { QuestionsComponent } from './statistics/questions/questions.component';
 import { VersionComponent } from './statistics/version/version.component';
 import { FiltersComponent } from './statistics/filters/filters.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { DetailsComponent } from './statistics/details/details.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { FiltersComponent } from './statistics/filters/filters.component';
     QuestionsComponent,
     VersionComponent,
     FiltersComponent,
+    BarChartComponent,
+    PieChartComponent,
+    DetailsComponent,
   ],
   imports: [
     CommonModule,
