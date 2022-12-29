@@ -5,5 +5,8 @@
       [data]="admittedData"
     ></app-filters>
   </div>
-  <app-bar-chart [data]="admittedBarChart"></app-bar-chart>
+  <app-bar-chart
+    (outputData)="showAdmittedDetails($event)"
+    [data]="admittedBarChart"
+  ></app-bar-chart>
 </div>

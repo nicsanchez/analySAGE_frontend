@@ -34,7 +34,7 @@ export class PieChartComponent implements AfterViewInit, OnInit {
     const ctx = this.pieChart.nativeElement;
 
     this.pieGraph = new Chart(ctx, {
-      type: 'pie',
+      type: this.data.typeChart,
       data: {
         labels: this.data.labels,
         datasets: [
@@ -42,7 +42,6 @@ export class PieChartComponent implements AfterViewInit, OnInit {
             label: this.data.dataset.label,
             data: this.data.dataset.data,
             backgroundColor: this.getRandomColor(),
-            hoverOffset: 4,
           },
         ],
       },
@@ -63,10 +62,10 @@ export class PieChartComponent implements AfterViewInit, OnInit {
 
   getRandomColor() {
     let colors = [];
-    for (var i = 0; i < 20; i++) {
+    for (let i = 0; i < 20; i++) {
       const letters = '0123456789ABCDEF'.split('');
       let color = '#';
-      for (var x = 0; x < 6; x++) {
+      for (let x = 0; x < 6; x++) {
         color += letters[Math.floor(Math.random() * 16)];
       }
       colors.push(color);
@@ -76,7 +75,7 @@ export class PieChartComponent implements AfterViewInit, OnInit {
 
   getDetailToPieChart() {
     if (this.data.method) {
-      this.filters.questionNumber = this.data.questionNumber;
+      this.filters.property = this.data.property;
       this.filters.type = this.data.type;
       this.data.method(this.filters, this.data.service).subscribe(
         (response: any) => {

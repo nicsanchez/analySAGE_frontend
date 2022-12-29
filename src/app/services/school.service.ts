@@ -15,9 +15,9 @@ export class SchoolService {
     );
   }
 
-  getAllSchoolsByNaturalnessAndMunicipality(data: any) {
+  getAllSchoolsByNaturalnessAndLocation(data: any) {
     return this.http.post(
-      `${environment.apiURL}/school/getAllSchoolsByNaturalnessAndMunicipality`,
+      `${environment.apiURL}/school/getAllSchoolsByNaturalnessAndLocation`,
       data
     );
   }

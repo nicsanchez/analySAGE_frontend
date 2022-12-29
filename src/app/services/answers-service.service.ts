@@ -89,4 +89,20 @@ export class AnswersService {
       { headers: answersService.headers }
     );
   }
+
+  getDetailsAnswerByRegistrationType(
+    data: any,
+    answersService: AnswersService
+  ) {
+    const token = localStorage.getItem('token');
+    answersService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return answersService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAnswerByRegistrationType`,
+      data,
+      { headers: answersService.headers }
+    );
+  }
 }

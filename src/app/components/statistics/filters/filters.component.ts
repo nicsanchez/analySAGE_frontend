@@ -33,6 +33,16 @@ export class FiltersComponent implements OnInit {
   public municipalities: any = [];
   public naturalnesses: any = [];
   public schools: any = [];
+  public locations: any = {
+    residence: {
+      labels: ['municipality', 'state', 'country'],
+      data: [],
+    },
+    school: {
+      labels: ['school', 'schoolMunicipality', 'schoolState', 'schoolCountry'],
+      data: [],
+    },
+  };
   public loading: boolean = false;
 
   @Input() data: any;
@@ -63,23 +73,24 @@ export class FiltersComponent implements OnInit {
   /* Método para construir el formulario reactivo*/
   buildForm() {
     this.form = this.fb.group({
-      semester: [undefined, Validators.required],
-      journey: [
-        undefined,
-        this.data.journeyRequired ? Validators.required : [],
-      ],
-      gender: [undefined],
-      stratum: [undefined],
-      firstOptionFaculty: [undefined],
-      firstOptionProgram: [undefined],
-      secondOptionFaculty: [undefined],
-      secondOptionProgram: [undefined],
-      continent: [undefined],
-      country: [undefined],
-      state: [undefined],
-      municipality: [undefined],
-      schoolNaturalness: [undefined],
-      school: [undefined],
+      semester: ['', Validators.required],
+      journey: ['', this.data.journeyRequired ? Validators.required : []],
+      gender: [''],
+      stratum: [''],
+      firstOptionFaculty: [''],
+      firstOptionProgram: [''],
+      secondOptionFaculty: [''],
+      secondOptionProgram: [''],
+      continent: [''],
+      country: [''],
+      state: [''],
+      municipality: [''],
+      schoolContinent: [''],
+      schoolCountry: [''],
+      schoolState: [''],
+      schoolMunicipality: [''],
+      schoolNaturalness: [''],
+      school: [''],
     });
   }
 
@@ -207,7 +218,8 @@ export class FiltersComponent implements OnInit {
     this.continentService.getAllContinents(data).subscribe(
       (response: any) => {
         if (response.status == 200) {
-          this.continents = response.data;
+          this.locations.residence.data[3] = response.data;
+          this.locations.school.data[4] = response.data;
         } else {
           this.toastrService.error(
             'No fue posible obtenerse los continentes del sistema.',
@@ -274,7 +286,7 @@ export class FiltersComponent implements OnInit {
 
   getAllJourneys() {
     const idSemester = this.form.controls['semester'].value;
-    this.form.controls['journey'].setValue(undefined);
+    this.form.controls['journey'].setValue('');
     if (idSemester) {
       const data = {
         token: localStorage.getItem('token'),
@@ -305,8 +317,8 @@ export class FiltersComponent implements OnInit {
 
   getProgramsByFaculty(idFaculty: any, type: any) {
     type === 'first'
-      ? this.form.controls['firstOptionProgram'].setValue(undefined)
-      : this.form.controls['secondOptionProgram'].setValue(undefined);
+      ? this.form.controls['firstOptionProgram'].setValue('')
+      : this.form.controls['secondOptionProgram'].setValue('');
     if (idFaculty) {
       const data = {
         token: localStorage.getItem('token'),
@@ -337,16 +349,13 @@ export class FiltersComponent implements OnInit {
     }
   }
 
-  getAllCountriesByContinent() {
-    const idContinent = this.form.controls['continent'].value;
-    this.form.controls['country'].setValue(undefined);
-    this.countries = [];
-    this.form.controls['state'].setValue(undefined);
-    this.states = [];
-    this.form.controls['municipality'].setValue(undefined);
-    this.municipalities = [];
-    this.form.controls['school'].setValue(undefined);
-    this.schools = [];
+  getAllCountriesByContinent(
+    idContinent: any,
+    key: string,
+    index: number,
+    dataIndex: number
+  ) {
+    this.resetAndRestoreSelects(index, key);
     if (idContinent) {
       const data = {
         token: localStorage.getItem('token'),
@@ -355,7 +364,7 @@ export class FiltersComponent implements OnInit {
       this.countryService.getAllCountriesByContinent(data).subscribe(
         (response: any) => {
           if (response.status == 200) {
-            this.countries = response.data;
+            this.locations[key].data[dataIndex] = response.data;
           } else {
             this.toastrService.error(
               'No fue posible obtenerse los paises del continente seleccionado',
@@ -373,14 +382,13 @@ export class FiltersComponent implements OnInit {
     }
   }
 
-  getAllStatesByCountry() {
-    const idCountry = this.form.controls['country'].value;
-    this.form.controls['state'].setValue(undefined);
-    this.states = [];
-    this.form.controls['municipality'].setValue(undefined);
-    this.municipalities = [];
-    this.form.controls['school'].setValue(undefined);
-    this.schools = [];
+  getAllStatesByCountry(
+    idCountry: any,
+    key: string,
+    index: any,
+    dataIndex: number
+  ) {
+    this.resetAndRestoreSelects(index, key);
     if (idCountry) {
       const data = {
         token: localStorage.getItem('token'),
@@ -389,7 +397,7 @@ export class FiltersComponent implements OnInit {
       this.stateService.getAllStatesByCountry(data).subscribe(
         (response: any) => {
           if (response.status == 200) {
-            this.states = response.data;
+            this.locations[key].data[dataIndex] = response.data;
           } else {
             this.toastrService.error(
               'No fue posible obtenerse los departamentos del pais seleccionado.',
@@ -407,12 +415,13 @@ export class FiltersComponent implements OnInit {
     }
   }
 
-  getAllMunicipalitiesByState() {
-    const idState = this.form.controls['state'].value;
-    this.form.controls['municipality'].setValue(undefined);
-    this.municipalities = [];
-    this.form.controls['school'].setValue(undefined);
-    this.schools = [];
+  getAllMunicipalitiesByState(
+    idState: any,
+    key: string,
+    index: number,
+    dataIndex: number
+  ) {
+    this.resetAndRestoreSelects(index, key);
     if (idState) {
       const data = {
         token: localStorage.getItem('token'),
@@ -421,7 +430,7 @@ export class FiltersComponent implements OnInit {
       this.municipalityService.getAllMunicipalitiesByState(data).subscribe(
         (response: any) => {
           if (response.status == 200) {
-            this.municipalities = response.data;
+            this.locations[key].data[dataIndex] = response.data;
           } else {
             this.toastrService.error(
               'No fue posible obtenerse los municipios del departamento seleccionado.',
@@ -439,37 +448,40 @@ export class FiltersComponent implements OnInit {
     }
   }
 
-  getAllSchoolsByNaturalnessAndMunicipality() {
-    const idMunicipality = this.form.controls['municipality'].value;
-    const schoolNaturalness = this.form.controls['schoolNaturalness'].value;
-    this.form.controls['school'].setValue(undefined);
-    this.schools = [];
-    if (idMunicipality || schoolNaturalness) {
-      const data = {
-        token: localStorage.getItem('token'),
-        idMunicipality,
-        schoolNaturalness,
-      };
-      this.schoolService
-        .getAllSchoolsByNaturalnessAndMunicipality(data)
-        .subscribe(
-          (response: any) => {
-            if (response.status == 200) {
-              this.schools = response.data;
-            } else {
-              this.toastrService.error(
-                'No fue posible obtenerse los colegios asociados.',
-                'Error'
-              );
-            }
-          },
-          () => {
-            this.toastrService.error(
-              'Ocurrio un error al obtenerse los colegios asociados.',
-              'Error'
-            );
-          }
+  getAllSchoolsByNaturalnessAndLocation() {
+    const data = {
+      token: localStorage.getItem('token'),
+      idContinent: this.form.controls['schoolContinent'].value,
+      idCountry: this.form.controls['schoolCountry'].value,
+      idState: this.form.controls['schoolState'].value,
+      idMunicipality: this.form.controls['schoolMunicipality'].value,
+      naturalness: this.form.controls['schoolNaturalness'].value,
+    };
+    this.resetAndRestoreSelects(1, 'school');
+    this.schoolService.getAllSchoolsByNaturalnessAndLocation(data).subscribe(
+      (response: any) => {
+        if (response.status == 200) {
+          this.locations['school'].data[0] = response.data;
+        } else {
+          this.toastrService.error(
+            'No fue posible obtenerse los colegios asociados.',
+            'Error'
+          );
+        }
+      },
+      () => {
+        this.toastrService.error(
+          'Ocurrio un error al obtenerse los colegios asociados.',
+          'Error'
         );
+      }
+    );
+  }
+
+  resetAndRestoreSelects(position: number, type: string) {
+    for (let i = 0; i < position; i++) {
+      this.locations[type].data[i] = [];
+      this.form.controls[this.locations[type].labels[i]].setValue(undefined);
     }
   }
 }

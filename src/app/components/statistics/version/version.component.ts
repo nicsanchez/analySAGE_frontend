@@ -2,8 +2,8 @@ import { preProcessStatisticsData } from './../../../../utils/preprocessStatisti
 import { PresentationService } from './../../../services/presentation.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AnswersService } from 'src/app/services/answers-service.service';
 import { splitStatisticsDataToChart } from 'src/utils/spliStatisticsDataToChart';
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-version',
@@ -36,7 +36,100 @@ export class VersionComponent {
   ) {}
 
   receiveDataAndProcessIt(data: any) {
+    this.filters = data.filters;
     const dashboardData = preProcessStatisticsData(data.right, data.bad);
     this.admittedBarChart = splitStatisticsDataToChart(dashboardData);
+  }
+
+  showAdmittedDetails(data: any) {
+    const type = !data.type ? 'admitidos' : 'no admitidos';
+    const datasetLabel = `Cantidad de ${type}`;
+    const chartsData = {
+      title: `Detalle de ${type} de la ${data.label.toLowerCase()}`,
+      charts: [
+        {
+          labels: [],
+          dataset: {
+            label: datasetLabel,
+            data: [],
+          },
+          title: `${datasetLabel} por versión`,
+          method:
+            this.presentationService
+              .getDetailsAdmittedOrUnAdmittedPeopleByVersion,
+          service: this.presentationService,
+          type: data.type ? 0 : 1,
+          property: data.label,
+          typeChart: 'bar',
+        },
+        {
+          labels: [],
+          dataset: {
+            label: datasetLabel,
+            data: [],
+          },
+          title: `${datasetLabel} por estrato social`,
+          method:
+            this.presentationService
+              .getDetailsAdmittedOrUnAdmittedPeopleByStratum,
+          service: this.presentationService,
+          type: data.type ? 0 : 1,
+          property: data.label,
+          typeChart: 'bar',
+        },
+        {
+          labels: [],
+          dataset: {
+            label: datasetLabel,
+            data: [],
+          },
+          title: `${datasetLabel} por departamento de residencia`,
+          method:
+            this.presentationService
+              .getDetailsAdmittedOrUnAdmittedPeopleByState,
+          service: this.presentationService,
+          type: data.type ? 0 : 1,
+          property: data.label,
+          typeChart: 'pie',
+        },
+        {
+          labels: [],
+          dataset: {
+            label: datasetLabel,
+            data: [],
+          },
+          title: `${datasetLabel} por programa`,
+          method:
+            this.presentationService
+              .getDetailsAdmittedOrUnAdmittedPeopleByProgram,
+          service: this.presentationService,
+          type: data.type ? 0 : 1,
+          property: data.label,
+          typeChart: 'pie',
+        },
+        {
+          labels: [],
+          dataset: {
+            label: datasetLabel,
+            data: [],
+          },
+          title: `${datasetLabel} por tipo de inscripción`,
+          method:
+            this.presentationService
+              .getDetailsAdmittedOrUnAdmittedPeopleByRegistrationType,
+          service: this.presentationService,
+          type: data.type ? 0 : 1,
+          property: data.label,
+          typeChart: 'pie',
+        },
+      ],
+      filters: this.filters,
+    };
+
+    this.dialog.open(DetailsComponent, {
+      data: chartsData,
+      height: '95%',
+      width: '100%',
+    });
   }
 }
