@@ -16,6 +16,8 @@ export class DynamicStatisticsComponent implements OnInit {
   >(1);
   protected _firstOptionProgramDestroy = new Subject<void>();
 
+  public tabs: any = [{ active: false }, { active: false }];
+
   constructor(private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       firstOptionProgram: [''],
@@ -25,6 +27,7 @@ export class DynamicStatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.fullfillForm();
     this.preparePredictiveSearch();
+    this.tabChange(0);
   }
 
   fullfillForm() {
@@ -67,5 +70,15 @@ export class DynamicStatisticsComponent implements OnInit {
         (option: any) => option.name.toLowerCase().indexOf(search) > -1
       )
     );
+  }
+
+  tabChange(tabIndex: number) {
+    for (let index = 0; index < this.tabs.length; index++) {
+      if (tabIndex == index) {
+        this.tabs[index] = { active: true };
+      } else {
+        this.tabs[index] = { active: false };
+      }
+    }
   }
 }

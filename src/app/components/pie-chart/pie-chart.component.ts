@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PieChartComponent implements AfterViewInit, OnInit {
   @ViewChild('pieChart') private pieChart: any;
   public pieGraph: any;
+  public loading = true;
 
   @Input() data: any;
   @Input() filters: any;
@@ -111,6 +112,7 @@ export class PieChartComponent implements AfterViewInit, OnInit {
   }
 
   setDataPieChart(labels: any, data: any) {
+    this.loading = false;
     this.pieGraph.data.labels = labels;
     this.pieGraph.data.datasets[0].data = data;
     this.pieGraph.update();

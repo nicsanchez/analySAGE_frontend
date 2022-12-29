@@ -1,6 +1,6 @@
 import { preProcessStatisticsData } from './../../../../utils/preprocessStatisticsData';
 import { AnswersService } from 'src/app/services/answers-service.service';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsComponent } from '../details/details.component';
 import { splitStatisticsDataToChart } from 'src/utils/spliStatisticsDataToChart';
@@ -47,6 +47,8 @@ export class QuestionsComponent {
     title: 'Segunda parte del examen de admisión',
     labels: [],
   };
+
+  @Input() active: boolean = false;
 
   constructor(
     public answersService: AnswersService,

@@ -3,6 +3,7 @@
     <app-filters
       (dashboardData)="receiveDataAndSplitItInTwoCharts($event)"
       [data]="questionsData"
+      [active]="active"
     ></app-filters>
   </div>
   <app-bar-chart

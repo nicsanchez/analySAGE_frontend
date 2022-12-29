@@ -1,6 +1,6 @@
 import { preProcessStatisticsData } from './../../../../utils/preprocessStatisticsData';
 import { PresentationService } from './../../../services/presentation.service';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { splitStatisticsDataToChart } from 'src/utils/spliStatisticsDataToChart';
 import { DetailsComponent } from '../details/details.component';
@@ -30,6 +30,9 @@ export class VersionComponent {
     title: 'Admitidos por facultad',
     labels: [],
   };
+
+  @Input() active: boolean = false;
+
   constructor(
     public presentationService: PresentationService,
     private dialog: MatDialog

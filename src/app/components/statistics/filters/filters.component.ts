@@ -1,6 +1,13 @@
 import { FacultyService } from './../../../services/faculty.service';
 import { ContinentService } from './../../../services/continent.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService } from 'src/app/services/country.service';
@@ -18,7 +25,7 @@ import { StratumService } from 'src/app/services/stratum.service';
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css'],
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, OnChanges {
   public form: any;
   public semesters: any = [];
   public journeys: any = [];
@@ -44,8 +51,10 @@ export class FiltersComponent implements OnInit {
     },
   };
   public loading: boolean = false;
+  public firstOpenTab: boolean = false;
 
   @Input() data: any;
+  @Input() active: boolean = false;
   @Output() dashboardData: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
@@ -65,9 +74,15 @@ export class FiltersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getIndependentFilters();
     this.buildForm();
-    this.getDashboardData({});
+  }
+
+  ngOnChanges() {
+    if (this.active && !this.firstOpenTab) {
+      this.getIndependentFilters();
+      this.getDashboardData({});
+      this.firstOpenTab = true;
+    }
   }
 
   /* Método para construir el formulario reactivo*/

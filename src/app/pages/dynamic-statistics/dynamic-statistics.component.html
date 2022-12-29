@@ -3,14 +3,17 @@
     <mat-card-title>
       <h1 class="card-title">Estadísticas dinámicas del examen de admisión</h1>
     </mat-card-title>
-    <mat-tab-group mat-stretch-tabs>
+    <mat-tab-group
+      mat-stretch-tabs
+      (selectedTabChange)="tabChange($event.index)"
+    >
       <mat-tab label="Discriminado por pregunta">
-        <app-questions></app-questions>
+        <app-questions [active]="tabs[0].active"></app-questions>
       </mat-tab>
       <mat-tab label="Discriminado por estado de admisión">
-        <app-version></app-version>
+        <app-version [active]="tabs[1].active"></app-version>
       </mat-tab>
-      <mat-tab label="Third"> </mat-tab>
+      <mat-tab label="Discriminado por componente"> </mat-tab>
     </mat-tab-group>
   </mat-card>
 </div>

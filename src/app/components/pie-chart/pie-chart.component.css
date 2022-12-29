@@ -1,0 +1,12 @@
+.graphic {
+  margin: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  position: relative;
+  left: 50%;
+  z-index: 1;
+}
