@@ -48,6 +48,11 @@ export class QuestionsComponent {
     labels: [],
   };
 
+  public keyStatistics: any = [
+    { label: 'Pregunta con mayor aciertos', data: 0 },
+    { label: 'Pregunta con menor aciertos', data: 0 },
+  ];
+
   @Input() active: boolean = false;
 
   constructor(
@@ -58,6 +63,7 @@ export class QuestionsComponent {
   receiveDataAndSplitItInTwoCharts(data: any) {
     this.filters = data.filters;
     const dashboardData = preProcessStatisticsData(data.right, data.bad);
+    this.processDataAndGetKeyStatistics(data.right, data.bad);
     const middleLength = Math.max(dashboardData.length / 2, 1);
     const firstChartData = dashboardData.slice(0, middleLength);
     const secondChartData = dashboardData.slice(
@@ -148,5 +154,20 @@ export class QuestionsComponent {
       height: '95%',
       width: '100%',
     });
+  }
+
+  processDataAndGetKeyStatistics(rights: any, bads: any) {
+    let keyMax: number[] = [0, 0];
+    keyMax[0] = rights.find(
+      (right: any) =>
+        right.count === Math.max(...rights.map((o: any) => o.count), 0)
+    ).parameter;
+    keyMax[1] = bads.find(
+      (right: any) =>
+        right.count === Math.max(...bads.map((o: any) => o.count), 0)
+    ).parameter;
+    for (let i = 0; i < this.keyStatistics.length; i++) {
+      this.keyStatistics[i].data = keyMax[i];
+    }
   }
 }

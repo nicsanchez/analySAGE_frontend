@@ -31,6 +31,7 @@ import { FiltersComponent } from './statistics/filters/filters.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { DetailsComponent } from './statistics/details/details.component';
+import { KeysComponent } from './statistics/keys/keys.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DetailsComponent } from './statistics/details/details.component';
     BarChartComponent,
     PieChartComponent,
     DetailsComponent,
+    KeysComponent,
   ],
   imports: [
     CommonModule,

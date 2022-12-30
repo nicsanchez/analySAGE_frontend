@@ -6,6 +6,7 @@
       [active]="active"
     ></app-filters>
   </div>
+  <app-keys [keys]="keyStatistics"></app-keys>
   <app-bar-chart
     (outputData)="showAdmittedDetails($event)"
     [data]="admittedBarChart"

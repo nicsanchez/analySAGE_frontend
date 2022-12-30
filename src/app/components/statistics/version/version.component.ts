@@ -31,6 +31,12 @@ export class VersionComponent {
     labels: [],
   };
 
+  public keyStatistics: any = [
+    { label: 'Total Aspirantes', data: 0 },
+    { label: 'Total Admitidos', data: 0 },
+    { label: 'Total No Admitidos', data: 0 },
+  ];
+
   @Input() active: boolean = false;
 
   constructor(
@@ -42,6 +48,7 @@ export class VersionComponent {
     this.filters = data.filters;
     const dashboardData = preProcessStatisticsData(data.right, data.bad);
     this.admittedBarChart = splitStatisticsDataToChart(dashboardData);
+    this.processDataAndGetKeyStatistics(data.right, data.bad);
   }
 
   showAdmittedDetails(data: any) {
@@ -134,5 +141,22 @@ export class VersionComponent {
       height: '95%',
       width: '100%',
     });
+  }
+
+  processDataAndGetKeyStatistics(admitted: any, unadmitted: any) {
+    let keyTotal: number[] = [0, 0, 0];
+    admitted.forEach((faculty: any) => {
+      keyTotal[0] += faculty.count;
+      keyTotal[1] += faculty.count;
+    });
+
+    unadmitted.forEach((faculty: any) => {
+      keyTotal[0] += faculty.count;
+      keyTotal[2] += faculty.count;
+    });
+
+    for (let i = 0; i < this.keyStatistics.length; i++) {
+      this.keyStatistics[i].data = keyTotal[i];
+    }
   }
 }
