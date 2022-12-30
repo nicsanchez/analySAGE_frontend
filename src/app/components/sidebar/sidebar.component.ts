@@ -13,18 +13,24 @@ export class SidebarComponent implements OnInit {
   public isExpanded = false;
 
   public ROUTES_ADMIN = [
-    { path: '/bulk', title: 'Cargas Masivas', icon: 'cloud_upload' },
-    { path: '/users', title: 'Usuarios', icon: 'people' },
     {
       path: '/dynamicStatistics',
       title: 'Estadísticas dinámicas',
       icon: 'bar_chart',
     },
-    { path: '/logs', title: 'Seguimiento', icon: 'visibility' },
+    { path: '/bulk', title: 'Cargas Masivas', icon: 'cloud_upload' },
+    { path: '/users', title: 'Usuarios', icon: 'people' },
     { path: '/configuration', title: 'Configuración', icon: 'settings' },
+    { path: '/logs', title: 'Seguimiento', icon: 'visibility' },
   ];
 
-  public ROUTES_USER = [];
+  public ROUTES_USER = [
+    {
+      path: '/dynamicStatistics',
+      title: 'Estadísticas dinámicas',
+      icon: 'bar_chart',
+    },
+  ];
 
   public menuItems: any = this.ROUTES_USER;
 

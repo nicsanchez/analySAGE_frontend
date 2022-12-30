@@ -1,3 +1,4 @@
+import { AdmittedComponent } from './statistics/admitted/admitted.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -26,12 +27,13 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { MatCardModule } from '@angular/material/card';
 import { BulkCardComponent } from './bulk-card/bulk-card.component';
 import { QuestionsComponent } from './statistics/questions/questions.component';
-import { VersionComponent } from './statistics/version/version.component';
 import { FiltersComponent } from './statistics/filters/filters.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { DetailsComponent } from './statistics/details/details.component';
 import { KeysComponent } from './statistics/keys/keys.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { SearchSelectComponent } from './search-select/search-select.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +46,13 @@ import { KeysComponent } from './statistics/keys/keys.component';
     FileUploadComponent,
     BulkCardComponent,
     QuestionsComponent,
-    VersionComponent,
+    AdmittedComponent,
     FiltersComponent,
     BarChartComponent,
     PieChartComponent,
     DetailsComponent,
     KeysComponent,
+    SearchSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ import { KeysComponent } from './statistics/keys/keys.component';
     NgxMatFileInputModule,
     FormsModule,
     MatCardModule,
+    NgxMatSelectSearchModule,
   ],
   exports: [
     NavbarComponent,
@@ -79,7 +83,7 @@ import { KeysComponent } from './statistics/keys/keys.component';
     UserFormComponent,
     BulkCardComponent,
     QuestionsComponent,
-    VersionComponent,
+    AdmittedComponent,
     FiltersComponent,
   ],
 })

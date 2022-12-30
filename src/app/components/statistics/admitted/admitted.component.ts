@@ -6,11 +6,11 @@ import { splitStatisticsDataToChart } from 'src/utils/spliStatisticsDataToChart'
 import { DetailsComponent } from '../details/details.component';
 
 @Component({
-  selector: 'app-version',
-  templateUrl: './version.component.html',
-  styleUrls: ['./version.component.css'],
+  selector: 'app-admitted',
+  templateUrl: './admitted.component.html',
+  styleUrls: ['./admitted.component.css'],
 })
-export class VersionComponent {
+export class AdmittedComponent {
   public filters: any = {};
   public admittedData: any = {
     method: this.presentationService.getAdmittedOrUnAdmittedPeople,

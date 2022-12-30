@@ -17,3 +17,7 @@
   font-size: 30px;
   color: var(--success);
 }
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+  color: var(--success);
+}

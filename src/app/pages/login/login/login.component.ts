@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
   setGlobalRoleAndGoToBulk(response: any, data: any) {
     if (response.status == 200) {
       this.loginService.setGlobalRol(response.data['0']['key']);
-      this.router.navigate(['bulk']);
+      this.router.navigate(['dynamicStatistics']);
       this.toastrService.success('Ha iniciado sesión exitosamente.', 'Exito');
     } else {
       const errorMessage =

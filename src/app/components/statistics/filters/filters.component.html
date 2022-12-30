@@ -16,7 +16,7 @@
           formControlName="semester"
           (selectionChange)="getAllJourneys()"
         >
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option *ngFor="let semester of semesters" [value]="semester.id">
             {{ semester.name }}
           </mat-option>
@@ -28,7 +28,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Jornada</mat-label>
         <mat-select formControlName="journey">
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
             *ngFor="let journey of journeys"
             [value]="journey.day_session"
@@ -44,7 +44,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Estrato</mat-label>
         <mat-select formControlName="stratum">
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option *ngFor="let stratum of stratums" [value]="stratum.id">
             {{ stratum.number }}
           </mat-option>
@@ -54,7 +54,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Género</mat-label>
         <mat-select formControlName="gender">
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option *ngFor="let gender of genders" [value]="gender.id">
             {{ gender.name }}
           </mat-option>
@@ -67,8 +67,17 @@
           formControlName="firstOptionFaculty"
           (selectionChange)="getProgramsByFaculty($event.value, 'first')"
         >
-          <mat-option></mat-option>
-          <mat-option *ngFor="let faculty of faculties" [value]="faculty.id">
+          <app-search-select
+            [selectData]="faculties"
+            (filteredData)="setFilteredData($event, 'firstOptionFaculties')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
+          <mat-option
+            *ngFor="
+              let faculty of selectWithFilters.firstOptionFaculties | async
+            "
+            [value]="faculty.id"
+          >
             {{ faculty.name }}
           </mat-option>
         </mat-select>
@@ -77,9 +86,15 @@
       <mat-form-field appearance="outline">
         <mat-label>Programa Primera Opción</mat-label>
         <mat-select formControlName="firstOptionProgram">
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="firstPrograms"
+            (filteredData)="setFilteredData($event, 'firstOptionPrograms')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let program of firstPrograms"
+            *ngFor="
+              let program of selectWithFilters.firstOptionPrograms | async
+            "
             [value]="program.id"
           >
             {{ program.name }}
@@ -93,8 +108,17 @@
           formControlName="secondOptionFaculty"
           (selectionChange)="getProgramsByFaculty($event.value, 'second')"
         >
-          <mat-option></mat-option>
-          <mat-option *ngFor="let faculty of faculties" [value]="faculty.id">
+          <app-search-select
+            [selectData]="faculties"
+            (filteredData)="setFilteredData($event, 'secondOptionFaculties')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
+          <mat-option
+            *ngFor="
+              let faculty of selectWithFilters.secondOptionFaculties | async
+            "
+            [value]="faculty.id"
+          >
             {{ faculty.name }}
           </mat-option>
         </mat-select>
@@ -103,9 +127,15 @@
       <mat-form-field appearance="outline">
         <mat-label>Programa Segunda Opción</mat-label>
         <mat-select formControlName="secondOptionProgram">
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="secondPrograms"
+            (filteredData)="setFilteredData($event, 'secondOptionPrograms')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let program of secondPrograms"
+            *ngFor="
+              let program of selectWithFilters.secondOptionPrograms | async
+            "
             [value]="program.id"
           >
             {{ program.name }}
@@ -126,7 +156,7 @@
             )
           "
         >
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
             *ngFor="let continent of locations.residence.data[3]"
             [value]="continent.id"
@@ -149,9 +179,13 @@
             )
           "
         >
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.residence.data[2]"
+            (filteredData)="setFilteredData($event, 'residenceCountries')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let country of locations.residence.data[2]"
+            *ngFor="let country of selectWithFilters.residenceCountries | async"
             [value]="country.id"
           >
             {{ country.name }}
@@ -172,9 +206,13 @@
             )
           "
         >
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.residence.data[1]"
+            (filteredData)="setFilteredData($event, 'residenceStates')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let state of locations.residence.data[1]"
+            *ngFor="let state of selectWithFilters.residenceStates | async"
             [value]="state.id"
           >
             {{ state.name }}
@@ -185,9 +223,16 @@
       <mat-form-field appearance="outline">
         <mat-label>Municipio de Residencia</mat-label>
         <mat-select formControlName="municipality">
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.residence.data[0]"
+            (filteredData)="setFilteredData($event, 'residenceMunicipalities')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let municipality of locations.residence.data[0]"
+            *ngFor="
+              let municipality of selectWithFilters.residenceMunicipalities
+                | async
+            "
             [value]="municipality.id"
           >
             {{ municipality.name }}
@@ -208,7 +253,7 @@
             )
           "
         >
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
             *ngFor="let continent of locations.school.data[4]"
             [value]="continent.id"
@@ -231,9 +276,13 @@
             )
           "
         >
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.school.data[3]"
+            (filteredData)="setFilteredData($event, 'schoolCountries')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let country of locations.school.data[3]"
+            *ngFor="let country of selectWithFilters.schoolCountries | async"
             [value]="country.id"
           >
             {{ country.name }}
@@ -255,9 +304,13 @@
           "
           (selectionChange)="getAllSchoolsByNaturalnessAndLocation()"
         >
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.school.data[2]"
+            (filteredData)="setFilteredData($event, 'schoolStates')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let state of locations.school.data[2]"
+            *ngFor="let state of selectWithFilters.schoolStates | async"
             [value]="state.id"
           >
             {{ state.name }}
@@ -271,9 +324,15 @@
           formControlName="schoolMunicipality"
           (selectionChange)="getAllSchoolsByNaturalnessAndLocation()"
         >
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.school.data[1]"
+            (filteredData)="setFilteredData($event, 'schoolMunicipalities')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let municipality of locations.school.data[1]"
+            *ngFor="
+              let municipality of selectWithFilters.schoolMunicipalities | async
+            "
             [value]="municipality.id"
           >
             {{ municipality.name }}
@@ -287,7 +346,7 @@
           formControlName="schoolNaturalness"
           (selectionChange)="getAllSchoolsByNaturalnessAndLocation()"
         >
-          <mat-option></mat-option>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
             *ngFor="let naturalness of naturalnesses"
             [value]="naturalness.naturalness"
@@ -300,9 +359,13 @@
       <mat-form-field appearance="outline">
         <mat-label>Colegio</mat-label>
         <mat-select formControlName="school">
-          <mat-option></mat-option>
+          <app-search-select
+            [selectData]="locations.school.data[0]"
+            (filteredData)="setFilteredData($event, 'schools')"
+          ></app-search-select>
+          <mat-option>Seleccione una opción</mat-option>
           <mat-option
-            *ngFor="let school of locations.school.data[0]"
+            *ngFor="let school of selectWithFilters.schools | async"
             [value]="school.id"
           >
             {{ school.name }}

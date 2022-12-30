@@ -72,7 +72,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./pages/login/users.module').then((x) => x.LoginModule),
+          import('./pages/login/login.module').then((x) => x.LoginModule),
       },
     ],
   },

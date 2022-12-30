@@ -19,6 +19,7 @@ import { SchoolService } from 'src/app/services/school.service';
 import { SemesterService } from 'src/app/services/semester.service';
 import { StateService } from 'src/app/services/state.service';
 import { StratumService } from 'src/app/services/stratum.service';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -40,6 +41,21 @@ export class FiltersComponent implements OnInit, OnChanges {
   public municipalities: any = [];
   public naturalnesses: any = [];
   public schools: any = [];
+
+  public selectWithFilters: any = {
+    firstOptionFaculties: new ReplaySubject<any[]>(1),
+    firstOptionPrograms: new ReplaySubject<any[]>(1),
+    secondOptionFaculties: new ReplaySubject<any[]>(1),
+    secondOptionPrograms: new ReplaySubject<any[]>(1),
+    residenceCountries: new ReplaySubject<any[]>(1),
+    residenceStates: new ReplaySubject<any[]>(1),
+    residenceMunicipalities: new ReplaySubject<any[]>(1),
+    schoolCountries: new ReplaySubject<any[]>(1),
+    schoolStates: new ReplaySubject<any[]>(1),
+    schoolMunicipalities: new ReplaySubject<any[]>(1),
+    schools: new ReplaySubject<any[]>(1),
+  };
+
   public locations: any = {
     residence: {
       labels: ['municipality', 'state', 'country'],
@@ -498,5 +514,9 @@ export class FiltersComponent implements OnInit, OnChanges {
       this.locations[type].data[i] = [];
       this.form.controls[this.locations[type].labels[i]].setValue(undefined);
     }
+  }
+
+  setFilteredData(filtered: any, key: string) {
+    this.selectWithFilters[key] = filtered.data;
   }
 }
