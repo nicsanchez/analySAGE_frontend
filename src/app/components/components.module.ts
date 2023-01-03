@@ -34,6 +34,7 @@ import { DetailsComponent } from './statistics/details/details.component';
 import { KeysComponent } from './statistics/keys/keys.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SearchSelectComponent } from './search-select/search-select.component';
+import { ComponentComponent } from './statistics/component/component.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SearchSelectComponent } from './search-select/search-select.component';
     DetailsComponent,
     KeysComponent,
     SearchSelectComponent,
+    ComponentComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +87,7 @@ import { SearchSelectComponent } from './search-select/search-select.component';
     QuestionsComponent,
     AdmittedComponent,
     FiltersComponent,
+    ComponentComponent,
   ],
 })
 export class ComponentsModule {}

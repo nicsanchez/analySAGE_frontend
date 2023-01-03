@@ -1,0 +1,14 @@
+<div class="col-12 mt-4">
+  <div>
+    <app-filters
+      (dashboardData)="receiveDataAndProcessIt($event)"
+      [data]="componentData"
+      [active]="active"
+    ></app-filters>
+  </div>
+  <app-keys [keys]="keyStatistics"></app-keys>
+  <app-bar-chart
+    (outputData)="showAverageDetails($event)"
+    [data]="componentBarChart"
+  ></app-bar-chart>
+</div>

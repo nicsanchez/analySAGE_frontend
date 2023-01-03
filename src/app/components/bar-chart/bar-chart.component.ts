@@ -55,6 +55,7 @@ export class BarChartComponent implements AfterViewInit, OnChanges {
       },
       options: {
         responsive: true,
+        indexAxis: this.data.mainAxis,
         onClick: (event) => {
           const points = this.barGraph.getElementsAtEventForMode(
             event,

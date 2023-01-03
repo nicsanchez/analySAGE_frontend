@@ -9,6 +9,7 @@
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
   border-radius: 0.5rem;
   background-color: var(--green_light);
+  column-gap: 1rem;
 }
 
 .keys-item{
@@ -33,4 +34,5 @@
   font-weight: bold;
   font-size: 2rem;
   margin: 0.5rem 0;
+  line-height: 2rem;
 }

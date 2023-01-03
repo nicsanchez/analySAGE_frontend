@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dynamic-statistics.component.css'],
 })
 export class DynamicStatisticsComponent implements OnInit {
-  public tabs: any = [{ active: false }, { active: false }];
+  public tabs: any = [{ active: false }, { active: false }, { active: false }];
 
   constructor() {}
 

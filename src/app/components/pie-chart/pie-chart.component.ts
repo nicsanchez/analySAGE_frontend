@@ -47,6 +47,7 @@ export class PieChartComponent implements AfterViewInit, OnInit {
         ],
       },
       options: {
+        indexAxis: this.data.mainAxis,
         plugins: {
           title: {
             display: true,
@@ -54,7 +55,7 @@ export class PieChartComponent implements AfterViewInit, OnInit {
           },
           legend: {
             display: true,
-            position: 'bottom',
+            position: this.data.legendPosition,
           },
         },
       },

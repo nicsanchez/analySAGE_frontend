@@ -104,4 +104,97 @@ export class PresentationService {
       { headers: presentationService.headers }
     );
   }
+
+  getAverageExamComponent(data: any, presentationService: PresentationService) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getAverageExamComponent`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
+
+  getDetailsAverageExamComponentByVersion(
+    data: any,
+    presentationService: PresentationService
+  ) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAverageExamComponentByVersion`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
+
+  getDetailsAverageExamComponentByState(
+    data: any,
+    presentationService: PresentationService
+  ) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAverageExamComponentByState`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
+
+  getDetailsAverageExamComponentByStratum(
+    data: any,
+    presentationService: PresentationService
+  ) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAverageExamComponentByStratum`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
+
+  getDetailsAverageExamComponentByProgram(
+    data: any,
+    presentationService: PresentationService
+  ) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAverageExamComponentByProgram`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
+
+  getDetailsAverageExamComponentByRegistrationType(
+    data: any,
+    presentationService: PresentationService
+  ) {
+    const token = localStorage.getItem('token');
+    presentationService.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return presentationService.http.post(
+      `${environment.apiURL}/statistics/getDetailsAverageExamComponentByRegistrationType`,
+      data,
+      { headers: presentationService.headers }
+    );
+  }
 }

@@ -92,6 +92,7 @@ export class QuestionsComponent {
           type: data.type,
           property: data.label,
           typeChart: 'bar',
+          cssClass: 'col-6',
         },
         {
           labels: [],
@@ -105,6 +106,7 @@ export class QuestionsComponent {
           type: data.type,
           property: data.label,
           typeChart: 'bar',
+          cssClass: 'col-6',
         },
         {
           labels: [],
@@ -118,6 +120,8 @@ export class QuestionsComponent {
           type: data.type,
           property: data.label,
           typeChart: 'pie',
+          legendPosition: 'top',
+          cssClass: 'col-7',
         },
         {
           labels: [],
@@ -131,6 +135,8 @@ export class QuestionsComponent {
           type: data.type,
           property: data.label,
           typeChart: 'pie',
+          legendPosition: 'right',
+          cssClass: 'col-10',
         },
         {
           labels: [],
@@ -144,6 +150,7 @@ export class QuestionsComponent {
           type: data.type,
           property: data.label,
           typeChart: 'pie',
+          cssClass: 'col-6',
         },
       ],
       filters: this.filters,
@@ -158,14 +165,16 @@ export class QuestionsComponent {
 
   processDataAndGetKeyStatistics(rights: any, bads: any) {
     let keyMax: number[] = [0, 0];
-    keyMax[0] = rights.find(
-      (right: any) =>
-        right.count === Math.max(...rights.map((o: any) => o.count), 0)
-    ).parameter;
-    keyMax[1] = bads.find(
-      (right: any) =>
-        right.count === Math.max(...bads.map((o: any) => o.count), 0)
-    ).parameter;
+    if (rights.length > 0 && bads.length > 0) {
+      keyMax[0] = rights.find(
+        (right: any) =>
+          right.count === Math.max(...rights.map((o: any) => o.count), 0)
+      ).parameter;
+      keyMax[1] = bads.find(
+        (right: any) =>
+          right.count === Math.max(...bads.map((o: any) => o.count), 0)
+      ).parameter;
+    }
     for (let i = 0; i < this.keyStatistics.length; i++) {
       this.keyStatistics[i].data = keyMax[i];
     }
