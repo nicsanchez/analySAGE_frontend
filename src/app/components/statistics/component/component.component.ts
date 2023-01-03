@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PresentationService } from 'src/app/services/presentation.service';
 import { preProcessStatisticsData } from 'src/utils/preprocessStatisticsData';
@@ -8,7 +8,6 @@ import { DetailsComponent } from '../details/details.component';
 @Component({
   selector: 'app-component',
   templateUrl: './component.component.html',
-  styleUrls: ['./component.component.css'],
 })
 export class ComponentComponent {
   public filters: any = {};

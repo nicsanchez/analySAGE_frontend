@@ -8,7 +8,6 @@ import { DetailsComponent } from '../details/details.component';
 @Component({
   selector: 'app-admitted',
   templateUrl: './admitted.component.html',
-  styleUrls: ['./admitted.component.css'],
 })
 export class AdmittedComponent {
   public filters: any = {};

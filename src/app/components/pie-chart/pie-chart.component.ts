@@ -67,8 +67,10 @@ export class PieChartComponent implements AfterViewInit, OnInit {
     for (let i = 0; i < 20; i++) {
       const letters = '0123456789ABCDEF'.split('');
       let color = '#';
+      let arr = new Uint32Array(1);
       for (let x = 0; x < 6; x++) {
-        color += letters[Math.floor(Math.random() * 16)];
+        crypto.getRandomValues(arr);
+        color += letters[Math.floor(arr[0] * Math.pow(2, -32) * 16)];
       }
       colors.push(color);
     }

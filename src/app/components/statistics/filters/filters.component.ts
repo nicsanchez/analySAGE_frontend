@@ -358,9 +358,11 @@ export class FiltersComponent implements OnInit, OnChanges {
       this.programService.getProgramsByFaculty(data).subscribe(
         (response: any) => {
           if (response.status == 200) {
-            type === 'first'
-              ? (this.firstPrograms = response.data)
-              : (this.secondPrograms = response.data);
+            if (type === 'first') {
+              this.firstPrograms = response.data;
+            } else {
+              this.secondPrograms = response.data;
+            }
           } else {
             this.toastrService.error(
               'No fue posible obtenerse los programas de la facultad seleccionada.',
@@ -376,7 +378,11 @@ export class FiltersComponent implements OnInit, OnChanges {
         }
       );
     } else {
-      type === 'first' ? (this.firstPrograms = []) : (this.secondPrograms = []);
+      if (type === 'first') {
+        this.firstPrograms = [];
+      } else {
+        this.secondPrograms = [];
+      }
     }
   }
 

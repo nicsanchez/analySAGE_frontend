@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 export class DynamicStatisticsComponent implements OnInit {
   public tabs: any = [{ active: false }, { active: false }, { active: false }];
 
-  constructor() {}
-
   ngOnInit(): void {
     this.tabChange(0);
   }

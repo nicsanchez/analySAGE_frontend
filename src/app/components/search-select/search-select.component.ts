@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -12,7 +11,6 @@ import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-search-select',
   templateUrl: './search-select.component.html',
-  styleUrls: ['./search-select.component.css'],
 })
 export class SearchSelectComponent implements OnChanges {
   public selectOptions: any;
