@@ -164,10 +164,17 @@ export class UserFormComponent implements OnInit {
       (response: any) => {
         this.loading = false;
         if (response.status == 200) {
-          this.toastrService.success(
-            'Se ha creado el usuario exitosamente',
-            'Exito'
-          );
+          if (this.data.user) {
+            this.toastrService.success(
+              'Se ha actualizado el usuario exitosamente',
+              'Exito'
+            );
+          } else {
+            this.toastrService.success(
+              'Se ha creado el usuario exitosamente',
+              'Exito'
+            );
+          }
           if (this.dialogRef) {
             this.dialogRef.close('ok');
           }
