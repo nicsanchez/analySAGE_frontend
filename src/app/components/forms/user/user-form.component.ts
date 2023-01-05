@@ -29,9 +29,11 @@ export class UserFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMyInformation();
-    this.getAllRoles();
     this.buildForm();
+    this.getMyInformation();
+    if (!this.data.personal) {
+      this.getAllRoles();
+    }
   }
 
   /* Método para construir el formulario reactivo*/

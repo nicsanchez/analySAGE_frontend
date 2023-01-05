@@ -152,12 +152,13 @@ export class AdmittedComponent {
 
   processDataAndGetKeyStatistics(admitted: any, unadmitted: any) {
     let keyTotal: number[] = [0, 0, 0];
-    if (admitted.length > 0 && unadmitted.length > 0) {
+    if (admitted.length > 0) {
       admitted.forEach((faculty: any) => {
         keyTotal[0] += faculty.count;
         keyTotal[1] += faculty.count;
       });
-
+    }
+    if (unadmitted.length > 0) {
       unadmitted.forEach((faculty: any) => {
         keyTotal[0] += faculty.count;
         keyTotal[2] += faculty.count;
